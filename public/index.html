@@ -113,9 +113,13 @@
                 var p = new Promise((resolve, reject) => {
                   getTopData(type, access_token, time_range, function (json) {
                     var itemnames = json.data.items.map((item, idx) => {
+                      var name = item.name;
+                      if (type === 'tracks') {
+                        name = item.artists.map((artist) => artist.name).join(', ') + ' - ' + name;
+                      }
                       return {
                         pos: idx + 1,
-                        name: item.name
+                        name: name
                       };
                     });
                     resolve({
