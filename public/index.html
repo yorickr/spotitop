@@ -56,11 +56,11 @@
         {{#each data}}
           <li>
               <h2>{{this.type}} {{this.time_range}}</h2>
-              <ul class="song_list" style="list-style: none;">
+              <ol class="song_list">
                 {{#each this.items}}
-                  <li>{{this.pos}} {{this.name}}</li>
+                  <li>{{this.name}}</li>
                 {{/each}}
-              </ul>
+              </ol>
           </li>
         {{/each}}
       </ul>
