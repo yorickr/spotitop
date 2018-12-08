@@ -29,6 +29,8 @@
         </div> -->
         <br>
         <button class="btn btn-default" id="obtain-new-token">Refresh</button>
+        <button class="btn btn-default" onclick="showTracks()">Show tracks</button>
+        <button class="btn btn-default" onclick="showArtists()">Show artists</button>
         <br>
         <div id="top-data"></div>
       </div>
@@ -55,18 +57,53 @@
       <ul class="data_list" style="list-style: none;">
         {{#each data}}
           <li>
-              <h2>{{this.type}} {{this.time_range}}</h2>
-              <ol class="song_list">
-                {{#each this.items}}
-                  <li>{{this.name}}</li>
-                {{/each}}
-              </ol>
+            {{#if this.isTracks}}
+              <div class="tracks">
+                <h2>Tracks: {{this.time_range}}</h2>
+                <ol class="song_list">
+                  {{#each this.items}}
+                    <li>{{this.name}}</li>
+                  {{/each}}
+                </ol>
+              </div>
+            {{else}}
+              <div class="artists" style="display:none">
+                <h2>Artists: {{this.time_range}}</h2>
+                <ol class="song_list">
+                  {{#each this.items}}
+                    <li>{{this.name}}</li>
+                  {{/each}}
+                </ol>
+              </div>
+            {{/if}}
           </li>
         {{/each}}
       </ul>
-
     </script>
 
+    <script>
+        function showTracks() {
+          var x = document.getElementsByClassName("tracks");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+          }
+          var x = document.getElementsByClassName("artists");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+        }
+
+        function showArtists() {
+          var x = document.getElementsByClassName("artists");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+          }
+          var x = document.getElementsByClassName("tracks");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+        }
+    </script>
     <!-- <script id="oauth-template" type="text/x-handlebars-template">
       <h2>oAuth info</h2>
       <dl class="dl-horizontal">
@@ -124,8 +161,9 @@
                     });
                     resolve({
                       type: type,
-                      time_range: time_range,
-                      items: itemnames
+                      time_range: time_range.replace(/_/g, ' '),
+                      items: itemnames,
+                      isTracks: (type === 'tracks')
                     });
                   });
                 });
@@ -179,7 +217,7 @@
             //   access_token: access_token,
             //   refresh_token: refresh_token
             // });
-            
+
             fetchAndRenderData();
 
             $.ajax({
@@ -221,4 +259,3 @@
     </script>
   </body>
 </html>
-
