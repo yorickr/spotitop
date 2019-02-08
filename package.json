@@ -6,16 +6,17 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
-    "express": "~4.16.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
     "next": "^7.0.2",
     "node-fetch": "^2.3.0",
-    "nodemon": "^1.18.5",
-    "querystring": "~0.2.0",
-    "react": "^16.7.0",
-    "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.7.0",
-    "request": "~2.83.0"
+    "nodemon": "^1.18.9",
+    "querystring": "^0.2.0",
+    "react": "^16.8.1",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-dom": "^16.8.1",
+    "request": "^2.88.0"
   },
   "scripts": {
     "dev": "nodemon ssr-server.js",
