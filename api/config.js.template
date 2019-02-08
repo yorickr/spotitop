@@ -1,0 +1,11 @@
+var port = 8080;
+var client_id = ''; // Your client id
+var client_secret = ''; // Your secret
+var redirect_uri = 'http://localhost:' + port + '/api/callback'; // Your redirect uri
+
+module.exports = {
+    client_id,
+    client_secret,
+    redirect_uri,
+    port
+};
