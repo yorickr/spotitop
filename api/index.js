@@ -71,6 +71,8 @@ router.get('/callback', function (req, res) {
 					refresh_token = body.refresh_token;
 
 				// we can also pass the token to the browser to make requests from there
+				res.redirect('/login?blob='+JSON.stringify({access_token, refresh_token}));
+				return;
 				res.json({
 					access_token: access_token,
 					refresh_token: refresh_token
