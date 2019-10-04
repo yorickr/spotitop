@@ -17,7 +17,7 @@ class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            spotify_data: cookies.get('spotify_data') || null
+            spotify_data: Auth.getAuthData() || null
         };
     }
 
@@ -32,9 +32,8 @@ class User extends Component {
         const data = JSON.parse(blob);
         console.log(data);
         Router.push(Router.pathname, '/user', {shallow:true});
-        this.setState({spotify_data: data}, () => {
-            cookies.set('spotify_data', data);
-        });
+        Auth.setAuthData(data);
+        this.setState({spotify_data: data});
     }
 
 	render () {
