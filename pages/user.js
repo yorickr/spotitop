@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import Router from 'next/router';
+
 import Header from './components/header.js';
 import UserInfo from './components/userinfo.js';
+import TrackInfo from './components/trackinfo';
+import ArtistInfo from './components/artistinfo';
+import Auth from './utils/auth';
+
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
-
 
 
 class User extends Component {
@@ -37,10 +41,14 @@ class User extends Component {
 		return (
 			<div className="container">
                 <Header/>
-                <div>
-                    {this.state.spotify_data && 
-                    <UserInfo data={this.state.spotify_data}/>}
-                </div>
+                {this.state.spotify_data && 
+                    <div>
+                        <UserInfo data={this.state.spotify_data}/>
+                        <TrackInfo />
+                        <ArtistInfo />
+
+                    </div>
+                }
 			</div>
 		);
 	}

@@ -7,6 +7,11 @@ class Login extends Component {
         super(props);
     }
 
+    static getInitialProps({query}) {
+        // koos nutteloos maar dit is blijkbaar nodig om statisch renderen van next niet uit te voeren.
+        return {query}
+    }
+
     onClickLogin () {
         console.log("Logging in");
         Router.push("/api/login");
@@ -14,10 +19,12 @@ class Login extends Component {
 
     componentDidMount() {
         if (!Router.query) {
+            console.log("Router query is empty.");
             return;
         }
         const blob = Router.query.blob;
         if (!blob) {
+            console.log("Blob is empty.");
             return;
         }
         Router.push({pathname: '/user', query: {blob}});
@@ -25,7 +32,7 @@ class Login extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className="container">
                 <Header/>
                 <button className="btn btn-primary" onClick={this.onClickLogin}>
                     Log in with Spotify

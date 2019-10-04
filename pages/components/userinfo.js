@@ -23,6 +23,7 @@ class UserInfo extends Component {
             console.log(json);
             this.setState({user_data: json});
         }).catch((error) => console.log(error));
+        
     }
 
     renderUserData () {
