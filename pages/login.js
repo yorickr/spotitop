@@ -1,6 +1,5 @@
-import fetch from 'node-fetch'
 import React, { Component } from 'react';
-import Head from 'next/head';
+import Header from './components/header.js';
 import Router from 'next/router';
 
 class Login extends Component {
@@ -27,10 +26,8 @@ class Login extends Component {
 	render () {
 		return (
 			<div>
-                <Head>
-					<title>Spotify top artists/tracks</title>
-				</Head>
-                <button onClick={this.onClickLogin}>
+                <Header/>
+                <button className="btn btn-primary" onClick={this.onClickLogin}>
                     Log in with Spotify
                 </button>
 			</div>
