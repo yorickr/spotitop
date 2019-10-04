@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import Auth from '../utils/auth';
 
 
 class UserInfo extends Component {
     constructor(props) {
         super(props);
-        const { data } = props;
         this.state = {
-            auth_data: data,
             user_data: null
         };
         this.renderUserData = this.renderUserData.bind(this);
@@ -15,7 +14,7 @@ class UserInfo extends Component {
     componentDidMount () {
         fetch("https://api.spotify.com/v1/me", {
                 headers: {
-                    'Authorization': 'Bearer ' + this.state.auth_data.access_token
+                    'Authorization': 'Bearer ' + Auth.getAuthData().access_token
                 }
         }).then((data) => {
             return data.json();

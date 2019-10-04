@@ -42,7 +42,7 @@ class User extends Component {
                 <Header/>
                 {this.state.spotify_data && 
                     <div>
-                        <UserInfo data={this.state.spotify_data}/>
+                        <UserInfo/>
                         <TrackInfo />
                         <ArtistInfo />
 

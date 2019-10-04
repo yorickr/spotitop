@@ -1,38 +1,46 @@
 import React, { Component } from 'react';
 
+import getArtists from '../utils/artists';
 
 class ArtistInfo extends Component {
     constructor(props) {
         super(props);
-        const { data } = props;
         this.state = {
-            auth_data: data,
-            user_data: null
+            artistData: null
         };
-        this.renderUserData = this.renderUserData.bind(this);
+        this.renderUserData = this.renderArtistData.bind(this);
     }
 
     componentDidMount () {
-        // fetch("https://api.spotify.com/v1/me", {
-        //         headers: {
-        //             'Authorization': 'Bearer ' + this.state.auth_data.access_token
-        //         }
-        // }).then((data) => {
-        //     return data.json();
-        // }).then((json) => {
-        //     console.log(json);
-        //     this.setState({user_data: json});
-        // }).catch((error) => console.log(error));
+        getArtists().then((artists) => {
+            this.setState({artistData: artists});
+        }).catch((error) => console.log(error));
     }
 
-    renderUserData () {
-        if (!this.state.user_data) {
+    renderArtistData () {
+        if (!this.state.artistData) {
             return <div/>;
         }
-        const {user_data} = this.state;
+        const {artistData} = this.state;
         return (
             <div>
-                <h1>Logged in as {user_data.display_name}</h1>
+                {artistData.map((artistMap, idx) => {
+                    return (
+                    <div key={idx}>
+                        <h2>Artists: {artistMap.time}</h2>
+                        <ol>
+                            {artistMap.artists.map((artist, idy) => {
+                                return(
+                                    <li key={idy}>
+                                        {artist.name}
+                                    </li>
+                                );
+                            })}
+                        </ol>
+                    </div>
+                    );
+
+                })}
 
             </div>
         );
@@ -41,8 +49,7 @@ class ArtistInfo extends Component {
     render () {
         return (
             <div>
-                Track Info
-                {this.renderUserData()}
+                {this.renderArtistData()}
             </div>
         );
     }
